@@ -1,3 +1,8 @@
 ﻿{
-
+  "ConnectionString": "",
+  "UserEmail": "",
+  "UserPassword": "",
+  "TwilioAccountSID": "",
+  "TwilioAuthToken": "",
+  "TwilioPhoneNumber": ""
 }

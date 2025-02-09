@@ -1,10 +1,11 @@
-﻿using System.Net;
+﻿using Spectre.Console;
+using System.Net;
 using System.Net.Mail;
 using static Phonebook.ConfigurationHelper;
 
 namespace Phonebook;
 
-public class MailSender
+public class EmailSender
 {
     private string smtpAddress = "smtp.gmail.com";
     private int smtpPort = 587;
@@ -14,13 +15,13 @@ public class MailSender
     private string subject;
     private string body;
 
-    public void SendMail(string emailReceiver, string subject, string body)
+    public void SendEmail(string emailReceiver, string subject, string body)
     {
-        MailMessage mail = new MailMessage();
-        mail.From = new MailAddress(emailSender);
-        mail.To.Add(emailReceiver);
-        mail.Subject = subject;
-        mail.Body = body;
+        MailMessage email = new MailMessage();
+        email.From = new MailAddress(emailSender);
+        email.To.Add(emailReceiver);
+        email.Subject = subject;
+        email.Body = body;
         
         SmtpClient smtpClient = new SmtpClient(smtpAddress, smtpPort);
         smtpClient.EnableSsl = true;
@@ -28,12 +29,14 @@ public class MailSender
 
         try
         {
-            smtpClient.Send(mail);
+            smtpClient.Send(email);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
         }
+        
+        AnsiConsole.MarkupLine("[honeydew2]Email sent successfully.[/]");
     }
 }

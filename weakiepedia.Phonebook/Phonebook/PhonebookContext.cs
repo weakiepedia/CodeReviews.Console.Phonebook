@@ -1,6 +1,15 @@
-﻿namespace Phonebook;
+﻿using Microsoft.EntityFrameworkCore;
+using Phonebook.Models;
+using static Phonebook.ConfigurationHelper;
 
-public class PhonebookContext
+namespace Phonebook;
+
+public class ContactContext : DbContext
 {
-    
+    public DbSet<Contact> Contacts { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(GetConnectionString());
+    }
 }
