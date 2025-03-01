@@ -26,6 +26,14 @@ public class UserInterface
             switch (startChoice)
             {
                 case "Browse contacts":
+                    if (!db.Contacts.Any())
+                    {
+                        AnsiConsole.Markup("[indianred1_1]No contacts found.[/]");
+                        PressAnyKey();
+                        
+                        continue;
+                    }
+                    
                     var contactChoice = AnsiConsole.Prompt(
                         new SelectionPrompt<Contact>()
                             .Title("Select a contact")
